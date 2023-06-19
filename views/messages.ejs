@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messages</title>
+    <link rel="stylesheet" href="./bootstrap-5.0.2-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./bootstrap-icons-1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="./styles/cssxw.css">
+
+</head>
+<body style="background-color: rgb(188, 228, 196);">
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg bg-light">
+            <div class="container-fluid">
+                <a href="/" class="navbar-brand text-dark">Messaging app</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="bi bi-list"></span>
+              </button>
+              <div class="collapse navbar-collapse col-sm-12 offset-sm-5" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                  <li class="nav-item">
+                    <a class="nav-link btn btn-link text-success" href="/home">Chat</a>
+                  </li>
+                  <li class="nav-item offset-sm-5">
+                    <a class="nav-link btn btn-link text-success" href="/messages"><i class="bi bi-messenger">Received</i></a>
+                  </li>
+                  <li class="nav-item offset-sm-5">
+                    <a class="nav-link btn btn-link text-success" href="/sent"><i class="bi bi-send">Sent</i></a>
+                  </li>
+                  <li class="nav-item offset-xs-5">
+                    <a class="btn btn-outline-success offset-sm-10" href="/logout">Logout</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+          <% if(datas[0] == undefined){ %>
+            <% if(fromDatas == 'false'){%>
+              <div class="card" style="margin-top: 20px;">
+                <div class="card-body">
+                    <p class="text-danger" >No messages found</p>
+                </div>
+            </div>
+            <%}%>
+            <% if(fromDatas != 'false'){%>
+            <% getDatas(fromDatas) %>
+             <% function getDatas(fromDatas){ %>
+                    <%  fromDatas.forEach(function(msgas) {%>
+                      <div class="card" style="margin-top: 20px;">
+                        <div class="card-body text-end" style="margin-top: 10px;">
+                          <p class="d-inline text-warning"><i class="bi bi-person-circle big"></i></p>
+                          <p class="d-inline margin_top">From: <%= msgas.to %></p>
+                       <p>Message :<%= msgas.message %></p>
+                       </div>
+                       </div>
+                   <% })%>
+        <% }; %>
+        <%}%>
+         <% }%>
+         <% if(datas[0] != undefined){ %>
+          <% if(fromDatas == 'false'){%>
+            <% datas.forEach(function(data){ %>
+              <div class="card" style="margin-top: 20px;">
+                <div class="card-body">
+                 <p class="d-inline text-warning"><i class="bi bi-person-circle big"></i></p>
+                   <p class="d-inline margin_top"> From: <%= data.from %></p>
+                 <p>Message :<%= data.message %></p>
+                </div>
+              </div>
+            <%})%>
+          <%}%>
+          <% if(fromDatas != 'false'){%>
+          <% getDatas(datas,fromDatas) %>
+           <% function getDatas(datas,fromDatas){ %>
+          <% datas.forEach(function(data) { %>
+                      <div class="card" style="margin-top: 20px;">
+                        <div class="card-body">
+                         <p class="d-inline text-warning"><i class="bi bi-person-circle big"></i></p>
+                           <p class="d-inline margin_top"> From: <%= data.from %></p>
+                         <p>Message :<%= data.message %></p>
+                        </div>
+                      </div>
+                      <%  fromDatas.forEach(function(msgas) {%>
+                      <div class="card" style="margin-top: 20px;">
+                        <div class="card-body text-end" style="margin-top: 10px;">
+                          <p class="d-inline text-warning"><i class="bi bi-person-circle big"></i></p>
+                          <p class="d-inline margin_top">From: <%= msgas.from %></p>
+                       <p>Message :<%= msgas.message %></p>
+                       </div>
+                       </div>
+                 <% })%>
+              <% }) %>
+      <% }; %>
+      <%}%>
+      <%}%>
+    </div>
+</body>
+<script src= "./bootstrap-5.0.2-dist/js/bootstrap.min.js" > </script>
+</html>

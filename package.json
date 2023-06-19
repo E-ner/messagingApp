@@ -1,16 +1,21 @@
 {
   "name": "messagingapp",
   "version": "1.0.0",
-  "description": "This is an api that helps the user to see hist or her messages",
+  "description": "The messaging application that helps the users to share content",
   "main": "index.js",
   "scripts": {
     "test": "nodemon"
   },
+  "repository": {
+    "type": "git",
+    "url": "messagingApp"
+  },
   "keywords": [
-    "ejs",
+    "mysql",
     "express",
-    "bodyparser"
+    "mime",
+    "mysql2"
   ],
   "author": "ProCell",
-  "license": "MIT"
+  "license": "ISC"
 }

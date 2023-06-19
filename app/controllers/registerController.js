@@ -1,32 +1,51 @@
 const { user } = require('../../database/index')
 const jwt = require('jsonwebtoken');
-const bcrypt= require('bcrypt')
+const bcrypt = require('bcrypt')
+const dotenv = require('dotenv')
+dotenv.config({ path:'./.env' })
 
-module.exports= (req,res)=>{
+module.exports = ( req,res ) => {
 
-    var {names,email,password} = req.body
+    var { names,email,password,confirm } = req.body
 
-    try {
-        bcrypt.hash(password,124)
-    } catch (error) {
-        if(error.instanceof(JsonWebTokenError)){
-            res.status(401).end()
+    if( password === confirm ){
+      user.findOne({
+        where:{
+            email:email
         }
-        res.status(400).end()
-    }
-
-
-   var token= jwt.sign({names,password},'THE KEY',{
-        algorithm:HS256,
-        expiresIn:'1d'
-    })
-    var cookie= cookie('token',token,{maxAge:86400})
-    user.create({
-        name:names,
-        email:email,
-        password:password
-    })
-       .then(data=>{
-        console.log(data)
-       })
+    }) 
+          .then( data => {
+            if(data){
+                res.render('register',{
+                  errors:'Try another email, email arleady exists'
+                })
+            }
+            else{
+              bcrypt.hash( password,12 )
+              .then( dat => {
+              var token = jwt.sign( { email:email,password:password },process.env.JWT_KEY,{
+                  algorithm:'HS256',
+                  expiresIn:'1d'
+              } )
+              res.cookie( 'token',token,{ expire: 360000*1000 } )
+              user.create({
+                name:names,
+                password:dat,
+                email:email,
+                status:1
+              })
+              res.redirect('/home')
+    
+              })
+              .catch( err => {
+                if( err ) console.error(err.message)
+              })
+            }
+          })
+        }
+      else{
+        res.render('register',{
+          errors:"The password doesn't match"
+        })
+      }
 }

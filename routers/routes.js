@@ -3,12 +3,23 @@ const SiteController = require('../app/controllers/SiteController')
 const LoginController = require('../app/controllers/loginController')
 const RegisterController = require('../app/controllers/registerController')
 const auth = require('../app/middleware/isAuthenticated')
+const homeAuth = require('../app/middleware/homeAuth')
+const LogoutController = require('../app/controllers/logoutController')
+const sendMsg = require('../app/controllers/chatController')
 
-app.get('/',auth,SiteController.index)
-app.get('/login',SiteController.login)
+
+app.get('/',SiteController.index)
+app.get('/login',auth,SiteController.login)
 app.get('/register',SiteController.register) 
-app.get('/home',auth,SiteController.home)
+app.get('/home',homeAuth)
+// app.get('/messages',sendMsg.received)
+app.get('/sent',sendMsg.sent)
 app.post('/login',LoginController)
 app.post('/register',RegisterController)
+app.get('/logout',LogoutController)
+app.post('/send',sendMsg.chat)
+app.get('*',function(req,res){
+    res.redirect('/')
+})
 
 module.exports = app

@@ -7,26 +7,27 @@
     <link rel="stylesheet" href="./bootstrap-5.0.2-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="./bootstrap-icons-1.10.5/font/bootstrap-icons.css">
 </head>
-<body style="background-color: rgb(202, 219, 218);">
+<body style="background-color: rgb(188, 228, 196);">
    <div class="container col-sm-12" style="padding: 40px;"> 
      <div class="col-sm-12 card">
-        <form action="/register" class="form form-horizontal" style="padding: 30px;" method="POST">
+        <form action="/register" class="form" style="padding: 30px;" method="POST">
             <h1 class="text-center">Create Account</h1><br>
             <div class="form-group col-sm-6 offset-sm-3">
-                <input type="text" id="names" class="text-center form-control " placeholder="Enter your names">
+                <input type="text" id="names" name="names" class="text-center form-control " placeholder="Enter your names" required>
             </div><br>
             <div class="form-group col-sm-6 offset-sm-3">
-                <input type="email" id="email" class="text-center form-control" placeholder="Enter your email">
+                <input type="email" id="email" name="email" class="text-center form-control" placeholder="Enter your email" required>
             </div><br>
             <div class="form-group col-sm-6 offset-sm-3">
-                <input type="password" id="password" class="text-center form-control" placeholder="Enter your password">
+                <input type="password" id="password" name="password" class="text-center form-control" placeholder="Enter your password" required>
             </div><br>
             <div class="form-group col-sm-6 offset-sm-3">
-                <input type="password" id="confirm" class="text-center form-control" placeholder="Confirm password">
+                <input type="password" id="confirm" name="confirm" class="text-center form-control" placeholder="Confirm password" required>
             </div><br>
+            <p class="text-danger text-center"><%= errors %></p>
             <div class="form-group ">
                 <div class="col-sm-6 offset-sm-3">
-                    <button type="submit" class="btn btn-primary col-sm-12">Sign up</button>                
+                    <button type="submit" class="btn btn-success col-sm-12">Sign up</button>                
                     <a href="/login" class="btn btn-link offset-sm-4">have an account? Login</a>
                 </div>
             </div>
