@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="./bootstrap-5.0.2-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./bootstrap-icons-1.10.5/font/bootstrap-icons.css">
+</head>
+<body style="background-color: rgb(202, 219, 218);">
+   <div class="container col-sm-12" style="padding: 20px;"> 
+     <div class="col-sm-12 card">
+        <form action="/login" class="form" style="padding: 30px;" method="POST">
+            <h1 class="text-center">Login</h1><br>
+                <div class="form-group col-sm-6 col-xs-12 offset-sm-3">
+                    <input type="email" id="email" name="email" class="text-center form-control" placeholder="Enter your email" required>
+                </div><br>
+                <div class="form-group col-sm-6 offset-sm-3">
+                    <input type="password" id="password" name="password" class="text-center form-control" placeholder="Enter your password" required>
+                </div><br>
+            <div class="form-group ">
+                <div class="col-sm-6 offset-sm-3">
+                    <button type="submit" class="btn btn-primary col-sm-12">Login</button>                
+                    <a href="/register" class="btn btn-link offset-sm-4">Create account?</a>
+                </div>
+            </div><br>
+            <div class="form-group text-center">
+                <div class="checkbox">
+                <label>
+                <input type="checkbox"> Remember me
+                </label>
+                </div >
+                </div >
+         </form>
+     </div>
+
+   </div>
+</body>
+<script src= "./bootstrap-5.0.2-dist/js/bootstrap.min.js" > </script>
+</html>
