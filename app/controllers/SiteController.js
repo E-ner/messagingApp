@@ -1,8 +1,5 @@
-
+const { user } = require('../../database/index')
 var SiteController = {
-    index: (req,res) => {
-        res.render('index')
-    },
     login: (req,res) => {
         res.render('login',{
             errors:''
@@ -14,10 +11,27 @@ var SiteController = {
         })
     },
     home: (req,res) => {
-        res.render('home',{
-            errors:''
-        })
+        getUsers(res)
     }
 }
 
 module.exports = SiteController
+
+function getUsers(res){
+    user.findAll()
+         .then( data => {
+            if(data[0] == undefined){
+                res.render('message',
+                {
+                    user:'',
+                    errors:''
+                })
+            }
+            else{
+                res.render('message',{
+                    user:data,
+                    errors:''
+                })
+            }
+         })
+}

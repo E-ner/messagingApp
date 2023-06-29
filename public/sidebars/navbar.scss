@@ -1,0 +1,158 @@
+.contents{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: auto;
+}
+.contents nav{
+    background: rgba(9, 163, 130, 0.699);
+    height: 10%;
+    display: flex;
+    filter: drop-shadow(-1px 1px 5px rgba(0, 0, 0, 0.555));
+    min-width: 30em;
+}
+.contents nav ul{
+    align-self: center;
+    display: flex;
+    margin-left: auto;
+    margin-right: 20px;
+}
+.contents nav ul li{
+    list-style: none;
+}
+.contents nav ul li a{
+    color: rgb(255, 255, 255);
+    font-size: 18px;
+    text-decoration: none;
+    align-self: center;
+    margin-left: 50px;
+    margin-right: auto;
+    filter: drop-shadow(-1px -1px 4px rgba(0, 0, 0, 0.555));
+}
+.contents nav .imgss {
+    align-self: center;
+    background-color: rgb(0, 143, 112);
+    border-radius: 50%/50%;
+    width: 2.6em;
+    height: 2.6em;
+    border: 1px solid rgba(18, 218, 174, 0.89);
+    text-decoration: none;
+    margin-left: 6px;
+}
+  
+  
+nav .imgss img {
+    width: 2.6em;
+    height: 2.6em;
+    border-radius: 50%/50%;
+    filter: opacity(80%);
+    transition: opacity 1s;
+}
+
+nav p{
+    color: white;
+    align-self: center;
+    margin-left: 20px;
+    font-size: 14px;
+    font-family: sans-serif;
+}
+
+.contents .chatBox{
+    display:flex;
+    flex-direction: column;
+    height: 80%;
+    min-width: 30em;
+}
+
+.contents .chatBox .chat-container{
+    width: 100%;
+    height: 28.5em;
+    display: flex;
+    flex-direction: column;
+    height: 400px;
+    overflow-x: scroll;
+}
+
+.contents .chatBox .chat-container .from{
+    height: fit-content;
+    margin-top: 30px;
+    margin-left: 40px;  
+    display: flex; 
+    background: rgb(0, 61, 48);
+    padding: 19px;
+    color: rgb(255, 255, 255);
+    flex-direction: column;
+    border-radius: 20px;
+    align-self: flex-start;
+}
+.contents .chatBox .chat-container .from .chat-time{
+    align-self: flex-end;
+    font-size: 12px;
+    font-family: sans-serif;
+    margin-top: 10px;
+}
+
+.contents .chatBox .chat-container .from .chat-text{
+    align-self: flex-start;
+    font-size: 14px;
+    font-family: sans-serif;
+}
+
+.contents .chatBox .chat-container .to{
+    height: fit-content;
+    margin-top: 30px;
+    margin-right: 40px;  
+    display: flex; 
+    background: rgb(0, 61, 48);
+    padding: 19px;
+    color: rgb(255, 255, 255);
+    flex-direction: column;
+    border-radius: 20px;
+    align-self: flex-end;
+}
+
+.contents .chatBox .chat-container .to .chat-time{
+    align-self: flex-end;
+    font-size: 12px;
+    font-family: sans-serif;
+    margin-top: 10px;
+}
+
+.contents .chatBox .chat-container .to .chat-text{
+    align-self: flex-start;
+    font-size: 14px;
+    font-family: sans-serif;
+}
+
+
+.contents .chatBox form{
+    display: flex;
+    width: 100%;
+    background-color: rgba(16, 161, 129, 0.507);
+    height: 3.2em;
+}
+.contents .chatBox form input{
+    width:56em;
+    outline: none;
+    margin-left: 10px;
+    align-self: center;
+    border-radius: 10px;
+    padding: 10px;
+    padding-left: 20px;
+    color: white;
+    font-size: 16px;
+    border: none;
+    background-color: rgba(13, 124, 100, 0.87);
+}
+
+.contents .chatBox form button{
+    background: white;
+    border: none;
+    color: rgb(10, 110, 89);
+    width: 50px;
+    margin-left: 4px;
+    border-radius: 10px;
+    height: 40px;
+    align-self: center;
+    font-size: 16px;
+}

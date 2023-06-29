@@ -3,31 +3,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-    <link rel="stylesheet" href="./bootstrap-5.0.2-dist/css/bootstrap.min.css">
+    <title>ChatK</title>
+    <link rel="stylesheet" href="./sidebars/sidebar.css">
+    <link rel="stylesheet" href="./sidebars/navbar.css">
     <link rel="stylesheet" href="./bootstrap-icons-1.10.5/font/bootstrap-icons.css">
+    <link rel="shortcut icon" href="./img/chat.png" type="image/x-icon">
 </head>
-<body  style="background-color: rgb(188, 228, 196);">
-    <div class="container-fluid">
-        <nav class="navbar navbar-expand-lg bg-light">
-            <div class="container-fluid">
-              <a href="/" class="navbar-brand text-dark">Messaging app</a>
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="bi bi-list"></span>
-              </button>
-              <div class="collapse navbar-collapse offset-sm-8" id="navbarNavDropdown">
-                <ul class="navbar-nav">
-                  <li class="nav-item offset-sm-3">
-                    <a class="nav-link text-dark btn btn-link" href="/home">Chat</a>
-                  </li>
-                  <li class="nav-item offset-sm-11 offset-xs-5">
-                    <a class=" nav-link btn btn-success text-white" href="/login">Login</a>
-                  </li>
-                </ul>
-              </div>
+<body>
+    <div class="container">
+
+        <!-- Friends side bar -->
+
+        <div class="sidebar">
+            <div class="pic">
+                <a class="profile" href="#"> <img src="./img/avatar.png" alt=""></a>
+                <a href="" id="edit">
+                    <p>Nsengiyumva Eric</p>     
+                </a>
             </div>
-          </nav>
+            <p id="friend">Friends</p>
+            <div class="friends">
+                    <a href="" class="active">
+                        <p class="imgs" href="#"> <img src="./img/avatar.png" alt=""></p>
+                        <p id="one">Eric A</p>
+                        <p id="two">last seen 11min </p>
+                    </a>
+                    <a href="#">
+                        <p class="imgs" href="#"> <img src="./img/avatar.png" alt=""><span></span></p>
+                        <p id="one">Cyomoro</p>
+                        <p id="two">last seen 1min </p>
+                    </a>
+                    <a href="#">
+                        <p class="imgs" href="#"> <img src="./img/avatar.png" alt=""></p>
+                        <p id="one">Emmy</p>
+                        <p id="two">last seen 4min </p>
+                    </a>            
+                    <a  href="#">
+                        <p class="imgs"> <img src="./img/avatar.png" alt=""><span></span></p>
+                        <p id="one">Joshua</p>
+                        <p id="two">last seen 1min </p>
+                    </a>
+                    <a  href="#">
+                        <p class="imgs" href="#"> <img src="./img/avatar.png" alt=""><span></span></p>
+                        <p id="one">Tuyishimire</p>
+                        <p id="two">last seen 1min </p>
+                    </a>
+                    <a href="#">
+                        <p class="imgs" href="#"> <img src="./img/avatar.png" alt=""><span></span></p>
+                        <p id="one">Cyomoro</p>
+                        <p id="two">last seen 1min </p>
+                    </a>
+                                        <a  href="#">
+                        <p class="imgs" href="#"> <img src="./img/avatar.png" alt=""><span></span></p>
+                        <p id="one">Tuyishimire</p>
+                        <p id="two">last seen 1min </p>
+                    </a>
+                    <a href="#">
+                        <p class="imgs" href="#"> <img src="./img/avatar.png" alt=""><span></span></p>
+                        <p id="one">Cyomoro</p>
+                        <p id="two">last seen 1min </p>
+                    </a>
+                                                  
+            </div>
+        </div>
+
+        <!-- The main section content -->
+
+        <div class="contents">
+            <nav>
+                <p class="imgss"> 
+                    <img src="./img/avatar.png" alt="">
+                </p>
+                <p>
+                    Online
+                </p>
+                <ul>
+                  <li><a href=""><i class="bi-chat-right-text-fill"></i></a></li>
+                  <li><a href=""><i class="bi-bell"></i></a></li>
+                </ul>
+            </nav>
+            <div class="chatBox">
+                <div class="chat-container">
+                    <% if(datas[0] == undefined){ %>                 
+                        <%}%>
+                    <% if(datas[0] != undefined){ %>
+                        <% getDatas(datas,fromDatas) %>
+                         <% function getDatas(datas,fromDatas){ %>
+                        <% datas.forEach(function(data) { %>
+                    <% if(fromDatas == data.from) {%>   
+                    <div class="from">
+                        <span class="chat-text"><%= data.message %></span>
+                        <span class="chat-time"><%= data.createdAt %></span>
+                    </div>
+                    <% }%>    
+                    <% if(fromDatas != data.from) {%>   
+                    <div class="to">
+                        <span class="chat-text"><%= data.message %></span>
+                        <span class="chat-time"><%= data.createdAt %></span>
+                    </div>
+                    <% }%>  
+                    <% }%>  
+                    <% }) %>
+            <% }; %>
+                </div>
+                    <form action="" method="POST">
+                        <input type="text" placeholder="Message ...">
+                        <button type="submit"><i class="bi-send"></i></button>
+                    </form>
+            </div>
+        </div>
     </div>
 </body>
-<script src= "./bootstrap-5.0.2-dist/js/bootstrap.min.js" > </script>
 </html>
+
+

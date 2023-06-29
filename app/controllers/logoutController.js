@@ -21,15 +21,18 @@ module.exports = (req,res) => {
            .then( data => {
            
                if(!data){
+                res.clearCookie('token')
+                res.clearCookie('email')
                 res.redirect('/register')
                }
                else{
                 data.update({
                   status:0
                 })
+                res.clearCookie('token')
+                res.clearCookie('email')
+                res.redirect('/')
                }
-               res.clearCookie('token')
-               res.redirect('/')
            })
     }
 

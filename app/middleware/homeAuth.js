@@ -1,10 +1,9 @@
 const jwt = require('jsonwebtoken')
+const { user } = require('../../database/index')
 
 const auth = (req,res)=>{
     if(isLoggedIn(req,res) != 0  && isLoggedIn(req,res) != null||undefined){
-        res.render('home',{
-            errors:''
-        })
+        home(req,res)
     }
     else{
         res.redirect('/login')
@@ -23,3 +22,41 @@ function isLoggedIn(req,res){
         //         .end()
     }
 }
+
+function home(req,res){
+    const from = req.cookies.token
+
+    var useremail
+
+    if(from)
+    {
+        try{
+
+            useremail = jwt.verify(from,process.env.JWT_KEY)
+        }
+        catch(e){
+            if(e.instanceof(jwt.JsonWebTokenError)) res.end()
+            res.end()
+        }
+    }
+            user.findAll()
+            .then( datas => {
+                if(datas[0] == undefined){
+                    res.render('messages',{
+                        datas:'',
+                        fromDatas:useremail.email,
+                        users:datas,
+                        to:''
+                    })    
+                }
+                else{
+                    res.render('messages',{
+                        datas:'',
+                        fromDatas:useremail.email,
+                        users:datas,
+                        to:''
+                    })    
+                }
+             })       
+}
+

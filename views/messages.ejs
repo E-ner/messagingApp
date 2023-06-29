@@ -3,98 +3,126 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Messages</title>
-    <link rel="stylesheet" href="./bootstrap-5.0.2-dist/css/bootstrap.min.css">
+    <title>ChatK</title>
+    <link rel="stylesheet" href="./sidebars/sidebar.css">
+    <link rel="stylesheet" href="./sidebars/navbar.css">
     <link rel="stylesheet" href="./bootstrap-icons-1.10.5/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="./styles/cssxw.css">
-
+    <link rel="shortcut icon" href="./img/chat.png" type="image/x-icon">
 </head>
-<body style="background-color: rgb(188, 228, 196);">
-    <div class="container-fluid">
-        <nav class="navbar navbar-expand-lg bg-light">
-            <div class="container-fluid">
-                <a href="/" class="navbar-brand text-dark">Messaging app</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="bi bi-list"></span>
-              </button>
-              <div class="collapse navbar-collapse col-sm-12 offset-sm-5" id="navbarNavDropdown">
-                <ul class="navbar-nav">
-                  <li class="nav-item">
-                    <a class="nav-link btn btn-link text-success" href="/home">Chat</a>
-                  </li>
-                  <li class="nav-item offset-sm-5">
-                    <a class="nav-link btn btn-link text-success" href="/messages"><i class="bi bi-messenger">Received</i></a>
-                  </li>
-                  <li class="nav-item offset-sm-5">
-                    <a class="nav-link btn btn-link text-success" href="/sent"><i class="bi bi-send">Sent</i></a>
-                  </li>
-                  <li class="nav-item offset-xs-5">
-                    <a class="btn btn-outline-success offset-sm-10" href="/logout">Logout</a>
-                  </li>
+<body>
+    <div class="container">
+
+        <!-- Friends side bar -->
+
+        <div class="sidebar">
+            <div class="pic">
+                <a class="profile" href="#"> <img src="./img/avatar.png" alt=""></a>
+                <a href="/logout" id="edit">
+                  <% if(users != ''){%>
+                    <% users.forEach(function(user) { %>
+                      <% if(user.email == fromDatas){%>
+                       <p><%= user.name%></p>
+                       <p>Logout</p>
+                      <%}%>
+                    <% })%>
+                  <% }%> 
+                </a>
+            </div>
+            <p id="friend">Friends</p>
+            <div class="friends">
+              <%  if(users == ''){%>
+                No users found
+              <% }%>
+              <% if(users != ''){%>
+                <% users.forEach(function(user) { %>
+                  <% if(user.email == fromDatas){%>
+                   
+                  <%}%>
+                  <% if(user.email != fromDatas){%>
+                      <% if(user.email == to){%>
+                        <a href="/user?name=<%= user.email%>" class="active">
+                          <p class="imgs" href="#"> <img src="./img/avatar.png" alt=""></p>
+                          <p id="one"><%= user.name%></p>
+                      </a> 
+                      <%}%>
+                      <% if(user.email != to){%>
+                        <a href="/user?name=<%= user.email%>">
+                          <p class="imgs" href="#"> <img src="./img/avatar.png" alt=""></p>
+                          <p id="one"><%= user.name%></p>
+                      </a> 
+                      <%}%>
+                    <%}%>
+                <% })%>
+              <% }%>                            
+            </div>
+        </div>
+
+        <!-- The main section content -->
+
+        <div class="contents">
+            <nav>
+              <%  if(users == ''){%>
+                No users found
+              <% }%>
+              <% if(users != ''){%>
+                <% users.forEach(function(user) { %>
+                      <% if(user.email == to){%>
+                        <p class="imgss"> 
+                          <img src="./img/avatar.png" alt="">
+                      </p>
+                      <% if( user.status == 1){%>
+                        <p>
+                          Online
+                      </p>
+                      <% }%>
+                      <% if( user.status != 1){%>
+                        <p>
+                          Offline
+                      </p>
+                      <% }%>
+                      <%}%>
+                      <% if(user.email != to){%>
+                        <% }%>
+                <% })%> 
+                <% }%>
+                <ul>
+                  <li><a href=""><i class="bi-chat-right-text-fill"></i></a></li>
+                  <li><a href=""><i class="bi-bell"></i></a></li>
                 </ul>
-              </div>
-            </div>
-          </nav>
-          <% if(datas[0] == undefined){ %>
-            <% if(fromDatas == 'false'){%>
-              <div class="card" style="margin-top: 20px;">
-                <div class="card-body">
-                    <p class="text-danger" >No messages found</p>
+            </nav>
+            <div class="chatBox">
+                <div class="chat-container">
+                    <% if(datas[0] == undefined){ %>      
+                        <%}%>
+                    <% if(datas[0] != undefined){ %>
+                        <% getDatas(datas,fromDatas) %>
+                         <% function getDatas(datas,fromDatas){ %>
+                        <% datas.forEach(function(data) { %>
+                    <% if(fromDatas == data.from) {%>   
+                      <div class="to">
+                        <span class="chat-text"><%= data.message %></span>
+                        <span class="chat-time"><%= data.created %></span>
+                    </div>                   
+                    <% }%>    
+                    <% if(fromDatas != data.from) {%>   
+
+                    <div class="from">
+                      <span class="chat-text"><%= data.message %></span>
+                      <span class="chat-time"><%= data.created%></span>
+                  </div>
+                    <% }%>  
+                    <% })%>  
+                    <% }%>
+                    <% }%>
                 </div>
+                    <form action="/send" method="POST">
+                        <input type="text" name="message" placeholder="Message ...">
+                        <button type="submit"><i class="bi-send"></i></button>
+                    </form>
             </div>
-            <%}%>
-            <% if(fromDatas != 'false'){%>
-            <% getDatas(fromDatas) %>
-             <% function getDatas(fromDatas){ %>
-                    <%  fromDatas.forEach(function(msgas) {%>
-                      <div class="card" style="margin-top: 20px;">
-                        <div class="card-body text-end" style="margin-top: 10px;">
-                          <p class="d-inline text-warning"><i class="bi bi-person-circle big"></i></p>
-                          <p class="d-inline margin_top">From: <%= msgas.to %></p>
-                       <p>Message :<%= msgas.message %></p>
-                       </div>
-                       </div>
-                   <% })%>
-        <% }; %>
-        <%}%>
-         <% }%>
-         <% if(datas[0] != undefined){ %>
-          <% if(fromDatas == 'false'){%>
-            <% datas.forEach(function(data){ %>
-              <div class="card" style="margin-top: 20px;">
-                <div class="card-body">
-                 <p class="d-inline text-warning"><i class="bi bi-person-circle big"></i></p>
-                   <p class="d-inline margin_top"> From: <%= data.from %></p>
-                 <p>Message :<%= data.message %></p>
-                </div>
-              </div>
-            <%})%>
-          <%}%>
-          <% if(fromDatas != 'false'){%>
-          <% getDatas(datas,fromDatas) %>
-           <% function getDatas(datas,fromDatas){ %>
-          <% datas.forEach(function(data) { %>
-                      <div class="card" style="margin-top: 20px;">
-                        <div class="card-body">
-                         <p class="d-inline text-warning"><i class="bi bi-person-circle big"></i></p>
-                           <p class="d-inline margin_top"> From: <%= data.from %></p>
-                         <p>Message :<%= data.message %></p>
-                        </div>
-                      </div>
-                      <%  fromDatas.forEach(function(msgas) {%>
-                      <div class="card" style="margin-top: 20px;">
-                        <div class="card-body text-end" style="margin-top: 10px;">
-                          <p class="d-inline text-warning"><i class="bi bi-person-circle big"></i></p>
-                          <p class="d-inline margin_top">From: <%= msgas.from %></p>
-                       <p>Message :<%= msgas.message %></p>
-                       </div>
-                       </div>
-                 <% })%>
-              <% }) %>
-      <% }; %>
-      <%}%>
-      <%}%>
+        </div>
     </div>
 </body>
-<script src= "./bootstrap-5.0.2-dist/js/bootstrap.min.js" > </script>
 </html>
+
+

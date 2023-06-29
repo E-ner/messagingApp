@@ -15,7 +15,7 @@ module.exports = ( req,res ) => {
            
                if(!data){
                 res.render('login',{
-                    error:'The credentials not found'
+                    errors:'The credentials not found'
                 })
                }
                else{
@@ -33,7 +33,7 @@ module.exports = ( req,res ) => {
                                 expiresIn:'1d'
                             })
                             res.cookie('token',token,{expire: 36000*1000 });  
-                            res.redirect('/home') 
+                            res.redirect('/') 
                         }
                 
                         else{
@@ -49,3 +49,5 @@ module.exports = ( req,res ) => {
                }
            })
     }
+
+    

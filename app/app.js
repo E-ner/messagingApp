@@ -12,5 +12,5 @@ app.set('view engine','ejs')
 app.use(cookiParser(process.env.JWT_KEY))
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(routes)
-app.listen(process.env.PORT || 1200)
+app.listen(process.env.PORT || 2000)
 console.log('listening on http://127.0.0.1:1200')
